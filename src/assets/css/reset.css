@@ -1,0 +1,95 @@
+@charset "utf-8";
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: #f9f9f9;
+    font-size: 13px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue',
+        'PingFang SC', 'Microsoft YaHei', 'Source Han Sans SC',
+        'Noto Sans CJK SC', 'WenQuanYi Micro Hei', sans-serif;
+}
+
+ol,
+ul {
+    list-style: none;
+}
+
+a {
+    color: #fe6a00;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #f16500;
+    text-decoration: none;
+}
+
+img {
+    border: none;
+    vertical-align: middle;
+}
+
+a,
+input,
+textarea,
+button {
+    outline: 0;
+}
+
+.fl {
+    float: left;
+}
+
+.fr {
+    float: right;
+}
+
+.clearfix::after {
+    content: '';
+    display: block;
+    clear: both;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.clear {
+    clear: both;
+}
+
+.gray {
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+    background-color: #fe6a00;
+    border: 1px solid #fe6a00;
+    color: #fff;
+    padding: 4px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.gray:hover {
+    background-color: #f16500;
+    border: 1px solid #f16500;
+    color: #fff;
+}
+
+.pull-left {
+    float: left;
+}
+
+.pull-right {
+    float: right;
+}
+
+.single-ellipsis {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}

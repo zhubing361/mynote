@@ -1,0 +1,21 @@
+{
+  "name": "mynote",
+  "version": "1.0.0",
+  "description": "A minimal Electron application for mynote",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "packager": "electron-packager ./ --platform=win32 --arch=x64 --icon=./dist/favicon.ico --overwrite --electron-zip-dir=./zip"
+  },
+  "repository": "https://github.com/electron/electron-quick-start",
+  "keywords": [
+    "Electron",
+    "start",
+    "demo"
+  ],
+  "author": "zhubing",
+  "license": "CC0-1.0",
+  "devDependencies": {
+    "electron": "^18.0.3"
+  }
+}

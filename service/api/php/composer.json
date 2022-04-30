@@ -1,0 +1,23 @@
+{
+    "name": "timi/phpcode",
+    "type": "project",
+    "require": {
+        "php": ">=7.4",
+        "mongodb/mongodb": "^1.12"
+    },
+    "autoload": {
+        "psr-4": {
+            "Timi\\PhpCode\\": "src/"
+        },
+        "files": [
+            "src/helpers.php"
+        ]
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "config": {
+        "optimize-autoloader": true,
+        "sort-packages": true
+    },
+    "scripts": {}
+}
