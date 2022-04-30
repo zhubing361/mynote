@@ -17,7 +17,7 @@
                             ></div>
                         </router-link>
                     </h4>
-                    <span class="datatime">{{ note.created_at }}</span>
+                    <span class="datatime">{{ note.updated_at }}</span>
                     <span>
                         <router-link :to="'/' + note.note_id + '/update.html'">修改</router-link>
                     </span>

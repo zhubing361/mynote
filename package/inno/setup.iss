@@ -27,9 +27,9 @@ DisableProgramGroupPage=yes
 ; Uncomment the following line to run in non administrative install mode (install for current user only.)
 ;PrivilegesRequired=lowest
 PrivilegesRequiredOverridesAllowed=dialog
-OutputDir=D:\dev\php\web\blog\mynote\package\bin
+OutputDir=D:\dev\node\web\mynote\package\bin
 OutputBaseFilename=mysetup
-SetupIconFile=D:\dev\php\web\blog\mynote\package\dist\favicon.ico
+SetupIconFile=D:\dev\node\web\mynote\package\dist\favicon.ico
 Password=123456
 Encryption=yes
 Compression=lzma
@@ -43,8 +43,8 @@ Name: "english"; MessagesFile: "compiler:Default.isl"
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
 
 [Files]
-Source: "D:\dev\php\web\blog\mynote\package\mynote-win32-x64\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
-Source: "D:\dev\php\web\blog\mynote\package\mynote-win32-x64\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "D:\dev\node\web\mynote\package\mynote-win32-x64\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
+Source: "D:\dev\node\web\mynote\package\mynote-win32-x64\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Registry]

@@ -48,6 +48,8 @@ electron zip包下载
 #### 项目打包步骤
 
     npm run build // 构建
+
+    cd package
     npm run start // 预览
     npm run packager // 打包
 
