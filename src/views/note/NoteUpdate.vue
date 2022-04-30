@@ -47,7 +47,7 @@
                                 <el-button
                                     type="primary"
                                     plain
-                                    @click="submit()"
+                                    @click="submit('button')"
                                 >提交</el-button>
                             </div>
                         </el-form-item>
@@ -104,6 +104,16 @@ export default {
             _self.form = res.data;
             _self.md = res.data.content;
         });
+
+        document.addEventListener('keydown', this.saveContent);
+
+        this.timer = setInterval(() => {
+            this.submit('timer');
+        }, 10 * 1000);
+    },
+    beforeUnmount() {
+        document.removeEventListener('keydown', this.saveContent);
+        clearInterval(this.timer);
     },
     watch: {
         'form.content': function (val) {
@@ -111,17 +121,29 @@ export default {
         },
     },
     methods: {
-        submit() {
+        submit(type) {
+            console.log('type: ', type);
             console.log(this.form);
             api.note.update(this.form.note_id, this.form).then(res => {
-                console.log(res);
-                ElMessage({
-                    message: res.message,
-                    type: res.result == 'success' ? 'success' : 'error',
-                    duration: 5 * 1000,
-                });
-                this.$router.push({ path: '/' });
+                if (type == 'button') {
+                    console.log(res);
+                    ElMessage({
+                        message: res.message,
+                        type: res.result == 'success' ? 'success' : 'error',
+                        duration: 5 * 1000,
+                    });
+                    // this.$router.push({ path: '/' });
+                }
             });
+        },
+        saveContent(e) {
+            var key = window.event.keyCode
+                ? window.event.keyCode
+                : window.event.which;
+            if (key === 83 && e.ctrlKey) {
+                this.submit('hot key');
+                e.preventDefault();
+            }
         },
         updateContent(content) {
             this.form.content = content;
