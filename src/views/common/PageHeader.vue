@@ -105,7 +105,10 @@
                 </div>
             </div>
 
-            <div class="fr searchbox">
+            <div
+                class="fr searchbox"
+                v-show="search_show"
+            >
                 <form target="_self">
                     <el-input
                         type="text"
@@ -134,6 +137,12 @@ export default {
             show: true,
             keyword: '',
         };
+    },
+    props: {
+        search_show: {
+            type: Boolean,
+            default: true,
+        },
     },
     mounted() {
         this.keyword = this.$parent.keyword;

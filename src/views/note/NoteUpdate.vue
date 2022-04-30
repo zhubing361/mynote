@@ -2,7 +2,7 @@
     <div class="container">
         <top-banner />
         <header>
-            <page-header />
+            <page-header :search_show="false" />
         </header>
         <div class="container-wrap">
             <el-row :gutter="60">
@@ -13,6 +13,7 @@
                                 <page-nav
                                     path=""
                                     :title="form.title"
+                                    :show_home="false"
                                 />
                             </h2>
                         </div>
@@ -45,6 +46,11 @@
                         <el-form-item>
                             <div class="page-btns">
                                 <el-button
+                                    type="danger"
+                                    plain
+                                    @click="confirmContent()"
+                                >取消</el-button>
+                                <el-button
                                     type="primary"
                                     plain
                                     @click="submit('button')"
@@ -67,7 +73,6 @@
 
 <script>
 import api from '@/api';
-import { ElMessage } from 'element-plus';
 import TopBanner from '@/views/common/TopBanner.vue';
 import PageHeader from '@/views/common/PageHeader.vue';
 import PageFooter from '@/views/common/PageFooter.vue';
@@ -91,7 +96,9 @@ export default {
                 title: '',
                 content: '',
             },
+            old_content: '',
             md: '',
+            content_saved: false,
         };
     },
     created() {
@@ -101,17 +108,24 @@ export default {
     mounted() {
         var _self = this;
         api.note.getDetail(_self.form.note_id).then(res => {
-            _self.form = res.data;
-            _self.md = res.data.content;
+            if (res.result == 'success') {
+                _self.form = res.data;
+                _self.md = res.data.content;
+                _self.old_content = res.data.content;
+
+                document.addEventListener('keydown', this.saveContent);
+
+                this.timer = setInterval(() => {
+                    this.submit('timer');
+                }, 1800 * 1 * 1000); // 30分钟自动保存一次
+            } else {
+                return _self.$utils.error(res.message || '未找到相关记录');
+            }
         });
-
-        document.addEventListener('keydown', this.saveContent);
-
-        this.timer = setInterval(() => {
-            this.submit('timer');
-        }, 10 * 1000);
     },
     beforeUnmount() {
+        this.confirmContent();
+
         document.removeEventListener('keydown', this.saveContent);
         clearInterval(this.timer);
     },
@@ -122,31 +136,68 @@ export default {
     },
     methods: {
         submit(type) {
-            console.log('type: ', type);
-            console.log(this.form);
+            console.log('type', type);
+            if (this.form.title.length <= 0) {
+                return this.$utils.error('标题未填写');
+            }
             api.note.update(this.form.note_id, this.form).then(res => {
-                if (type == 'button') {
-                    console.log(res);
-                    ElMessage({
-                        message: res.message,
-                        type: res.result == 'success' ? 'success' : 'error',
-                        duration: 5 * 1000,
-                    });
-                    // this.$router.push({ path: '/' });
+                if (res.result == 'success') {
+                    this.$utils.success(res.message);
+                } else {
+                    this.$utils.error(res.message);
                 }
+                // this.$router.push({ path: '/' });
             });
         },
         saveContent(e) {
-            var key = window.event.keyCode
-                ? window.event.keyCode
-                : window.event.which;
-            if (key === 83 && e.ctrlKey) {
-                this.submit('hot key');
-                e.preventDefault();
+            if (e != undefined) {
+                var key = window.event.keyCode
+                    ? window.event.keyCode
+                    : window.event.which;
+                if (key === 83 && e.ctrlKey) {
+                    this.submit('ctrl+s');
+                    e.preventDefault();
+                }
             }
         },
         updateContent(content) {
             this.form.content = content;
+        },
+        confirmContent() {
+            if (this.content_saved) {
+                return false;
+            }
+            if (this.old_content != this.form.content) {
+                this.$confirm(
+                    '检测到未保存的内容，是否在离开页面前保存修改？',
+                    '确认信息',
+                    {
+                        distinguishCancelAndClose: true,
+                        confirmButtonText: '保存',
+                        cancelButtonText: '放弃修改',
+                    }
+                )
+                    .then(() => {
+                        this.content_saved = true;
+                        this.submit('unmount');
+                        this.$router.push({ path: '/' });
+                    })
+                    .catch(action => {
+                        if (action == 'cancel') {
+                            this.content_saved = true;
+                            // 放弃保存并离开页面
+                            this.$router.push({ path: '/' });
+                        } else {
+                            // 停留在当前页面
+                            this.$message({
+                                type: 'info',
+                                message: '已取消',
+                            });
+                        }
+                    });
+            } else {
+                this.$router.push({ path: '/' });
+            }
         },
     },
 };

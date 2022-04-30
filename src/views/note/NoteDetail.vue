@@ -1,8 +1,11 @@
 <template>
-    <div class="container">
+    <div
+        class="container"
+        v-loading="loading"
+    >
         <top-banner />
         <header>
-            <page-header />
+            <page-header :search_show="false" />
         </header>
         <div class="container-wrap">
             <el-row :gutter="60">
@@ -58,6 +61,7 @@ export default {
                 content: '',
             },
             md: '',
+            loading: false,
         };
     },
     components: {
@@ -74,9 +78,15 @@ export default {
     },
     mounted() {
         var _self = this;
+        this.loading = true;
         api.note.getDetail(_self.detail.id).then(res => {
-            _self.detail = res.data;
-            _self.md = res.data.content;
+            _self.loading = false;
+            if (res.result == 'success') {
+                _self.detail = res.data;
+                _self.md = res.data.content;
+            } else {
+                _self.$utils.error(res.message);
+            }
         });
     },
     watch: {

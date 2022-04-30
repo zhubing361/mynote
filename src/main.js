@@ -17,6 +17,10 @@ if (process.env.VUE_APP_MOCK == 'true' && process.env.NODE_ENV === 'development'
 
 const app = createApp(App)
 
+// 注册全局方法
+import utils from '@/utils/utils.js'
+app.config.globalProperties.$utils = utils
+
 app.use(ElementPlus, {
     locale: zhCn,
 })

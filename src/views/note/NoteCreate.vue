@@ -2,7 +2,7 @@
     <div class="container">
         <top-banner />
         <header>
-            <page-header />
+            <page-header :search_show="false" />
         </header>
         <div class="container-wrap">
             <el-row :gutter="60">
@@ -61,7 +61,6 @@
 
 <script>
 import api from '@/api';
-import { ElMessage } from 'element-plus';
 import TopBanner from '@/views/common/TopBanner.vue';
 import PageHeader from '@/views/common/PageHeader.vue';
 import PageFooter from '@/views/common/PageFooter.vue';
@@ -98,11 +97,11 @@ export default {
             console.log(this.form);
             api.note.create(this.form).then(res => {
                 console.log(res);
-                ElMessage({
-                    message: res.message,
-                    type: res.result == 'success' ? 'success' : 'error',
-                    duration: 5 * 1000,
-                });
+                if (res.result == 'success') {
+                    this.$utils.success(res.message);
+                } else {
+                    this.$utils.error(res.message);
+                }
                 this.$router.push({ path: '/' });
             });
         },

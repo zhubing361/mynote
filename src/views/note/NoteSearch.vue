@@ -1,5 +1,8 @@
 <template>
-    <div class="container">
+    <div
+        class="container"
+        v-loading="loading"
+    >
         <top-banner />
         <header>
             <page-header ref="pageHeader" />
@@ -72,6 +75,7 @@ export default {
             },
             images: [],
             keyword: '',
+            loading: false,
         };
     },
     created() {
@@ -99,6 +103,7 @@ export default {
             }
             _self.$route.query.keyword = ''; // 从其他页面跳转过来搜索参数只用一次
 
+            this.loading = true;
             api.note
                 .getList({
                     page_size: _self.pagination.perPage,
@@ -106,8 +111,13 @@ export default {
                     keyword: keyword,
                 })
                 .then(res => {
-                    _self.items = res.data.items;
-                    _self.pagination = res.data.pagination;
+                    this.loading = false;
+                    if (res.result == 'success') {
+                        _self.items = res.data.items;
+                        _self.pagination = res.data.pagination;
+                    } else {
+                        _self.$utils.error();
+                    }
                 });
         },
         pageSize(page_size) {

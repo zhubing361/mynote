@@ -1,7 +1,10 @@
 <template>
     <div class="nav">
         <el-breadcrumb separator="/">
-            <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+            <el-breadcrumb-item
+                :to="{ path: '/' }"
+                v-show="show_home"
+            >首页</el-breadcrumb-item>
             <el-breadcrumb-item
                 :to="{ path: path }"
                 v-if="path != ''"
@@ -25,6 +28,10 @@ export default {
         path: {
             type: String,
             default: '/',
+        },
+        show_home: {
+            type: Boolean,
+            default: true,
         },
     },
 };

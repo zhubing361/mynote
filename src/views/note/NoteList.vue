@@ -1,8 +1,11 @@
 <template>
-    <div class="container">
+    <div
+        class="container"
+        v-loading="loading"
+    >
         <top-banner />
         <header>
-            <page-header />
+            <page-header :search_show="true" />
         </header>
 
         <div class="page-swiper">
@@ -69,6 +72,7 @@ export default {
                 totalPage: 1,
             },
             images: [],
+            loading: false,
         };
     },
 
@@ -84,16 +88,22 @@ export default {
         getList(page) {
             var _self = this;
             if (page == undefined) {
-                if (this.pagination.currentPage) {
-                    page = this.pagination.currentPage;
+                if (_self.pagination.currentPage) {
+                    page = _self.pagination.currentPage;
                 } else {
                     page = 1;
                 }
             }
-            this.$route.params.page = page;
+            _self.$route.params.page = page;
+            _self.loading = true;
             api.note.getList({ page_size: 10, page: page }).then(res => {
-                _self.items = res.data.items;
-                _self.pagination = res.data.pagination;
+                _self.loading = false;
+                if (res.result == 'success') {
+                    _self.items = res.data.items;
+                    _self.pagination = res.data.pagination;
+                } else {
+                    _self.$utils.error();
+                }
             });
         },
         pageSize(page_size) {
