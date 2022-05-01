@@ -22,14 +22,23 @@
                 @load="getList"
             >
                 <van-cell
-                    v-for="item in items"
+                    v-for="(item, index) in items"
                     :key="item.note_id"
                     :offset="100"
                     is-link
                     :to="'/app/' + item.note_id"
                 >
                     <template #title>
-                        <div v-html="item.title"></div>
+                        <div>
+                            <span>{{index+1}}、</span>
+                            <span v-html="item.title"></span>
+                        </div>
+                        <div class="time-field">
+                            <span>{{item.updated_at}}</span><span>更新</span>
+                        </div>
+                    </template>
+                    <template #extra>
+
                     </template>
                 </van-cell>
             </van-list>
@@ -131,4 +140,9 @@ export default {
 </script>
 
 <style>
+.time-field {
+    text-align: right;
+    font-size: smaller;
+    color: #999;
+}
 </style>

@@ -45,8 +45,10 @@ export default {
 <style>
 .app-back-top {
     position: fixed !important;
-    right: 0px !important;
-    bottom: 0px !important;
+    right: 0.3rem !important;
+    bottom: 0.3rem !important;
     z-index: 9999 !important;
+    width: 2rem !important;
+    height: 2rem !important;
 }
 </style>

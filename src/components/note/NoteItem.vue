@@ -47,6 +47,10 @@ export default {
             type: Function,
             default: null,
         },
+        pageSize: {
+            type: Function,
+            default: null,
+        },
         items: {
             type: Array,
             default: () => {

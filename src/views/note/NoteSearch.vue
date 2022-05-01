@@ -28,6 +28,7 @@
                                 :items="items"
                                 :pagination="pagination"
                                 :getList="getList"
+                                :pageSize="pageSize"
                             />
                         </div>
                     </el-card>

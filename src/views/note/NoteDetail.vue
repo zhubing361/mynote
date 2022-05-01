@@ -23,7 +23,7 @@
                             class="archive-time"
                             title="创建于:{{detail.created_at}}"
                         >
-                            {{ detail.created_at }} 更新
+                            {{ detail.updated_at }} 更新
                         </div>
                         <div>
                             <el-tag

@@ -30,6 +30,7 @@
                                 :items="items"
                                 :pagination="pagination"
                                 :getList="getList"
+                                :pageSize="pageSize"
                             />
                         </div>
                     </el-card>
@@ -96,15 +97,17 @@ export default {
             }
             _self.$route.params.page = page;
             _self.loading = true;
-            api.note.getList({ page_size: 10, page: page }).then(res => {
-                _self.loading = false;
-                if (res.result == 'success') {
-                    _self.items = res.data.items;
-                    _self.pagination = res.data.pagination;
-                } else {
-                    _self.$utils.error();
-                }
-            });
+            api.note
+                .getList({ page_size: this.pagination.perPage, page: page })
+                .then(res => {
+                    _self.loading = false;
+                    if (res.result == 'success') {
+                        _self.items = res.data.items;
+                        _self.pagination = res.data.pagination;
+                    } else {
+                        _self.$utils.error();
+                    }
+                });
         },
         pageSize(page_size) {
             this.pagination.perPage = page_size;
