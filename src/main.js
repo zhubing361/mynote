@@ -10,6 +10,9 @@ import 'element-plus/dist/index.css'
 
 import store from './store'
 
+import Vant from 'vant';
+import 'vant/lib/index.css';
+
 console.log(process.env)
 if (process.env.VUE_APP_MOCK == 'true' && process.env.NODE_ENV === 'development') {
     require("@/mock")
@@ -24,6 +27,7 @@ app.config.globalProperties.$utils = utils
 app.use(ElementPlus, {
     locale: zhCn,
 })
+app.use(Vant)
 app.use(router)
 app.use(store)
 app.mount('#app')

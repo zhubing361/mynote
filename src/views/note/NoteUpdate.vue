@@ -26,9 +26,22 @@
                                 <el-form-item
                                     label="标题"
                                     prop="title"
+                                    placeholder="请输入标题"
+                                    clearable
                                 >
                                     <el-input v-model="form.title" />
                                 </el-form-item>
+
+                                <el-form-item
+                                    label="标签"
+                                    prop="tags"
+                                >
+                                    <note-tag
+                                        :tags="form.tags"
+                                        :updateTags="updateTags"
+                                    />
+                                </el-form-item>
+
                                 <el-form-item
                                     label="内容"
                                     prop="content"
@@ -79,6 +92,7 @@ import PageFooter from '@/views/common/PageFooter.vue';
 import PageNav from '@/views/common/PageNav.vue';
 import MarkdownFullPageEditor from '@/components/MarkdownFullPageEditor.vue';
 import MarkdownEditor from '@/components/MarkdownEditor.vue';
+import NoteTag from '@/components/note/NoteTag.vue';
 export default {
     name: 'NoteUpdate',
     components: {
@@ -88,12 +102,14 @@ export default {
         'page-nav': PageNav,
         'fullpage-editor': MarkdownFullPageEditor,
         'markdown-editor': MarkdownEditor,
+        'note-tag': NoteTag,
     },
     data() {
         return {
             form: {
                 note_id: '',
                 title: '',
+                tags: '',
                 content: '',
             },
             old_content: '',
@@ -109,7 +125,7 @@ export default {
         var _self = this;
         api.note.getDetail(_self.form.note_id).then(res => {
             if (res.result == 'success') {
-                _self.form = res.data;
+                _self.form = { ..._self.form, ...res.data };
                 _self.md = res.data.content;
                 _self.old_content = res.data.content;
 
@@ -146,7 +162,9 @@ export default {
                 } else {
                     this.$utils.error(res.message);
                 }
-                // this.$router.push({ path: '/' });
+                if (type == 'button') {
+                    this.$router.push({ path: '/' });
+                }
             });
         },
         saveContent(e) {
@@ -198,6 +216,11 @@ export default {
             } else {
                 this.$router.push({ path: '/' });
             }
+        },
+        updateTags(new_tags) {
+            console.log(new_tags);
+            this.form.tags = new_tags;
+            console.log(this.form.tags);
         },
     },
 };

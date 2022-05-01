@@ -1,3 +1,4 @@
+// pc
 import NoteList from '@/views/note/NoteList.vue'
 import NoteSearch from '@/views/note/NoteSearch.vue'
 import NoteDetail from '@/views/note/NoteDetail.vue'
@@ -7,7 +8,12 @@ import PagesAbout from '@/views/pages/PagesAbout.vue'
 import PagesSitemap from '@/views/pages/PagesSitemap.vue'
 import MarkdownEditor from '@/components/MarkdownEditor.vue'
 
+// app
+import NoteAppIndex from '@/views/note/NoteAppIndex.vue'
+import NoteAppDetail from '@/views/note/NoteAppDetail.vue'
+
 import { createRouter, createWebHashHistory } from 'vue-router'
+
 
 const routes = [
     { name: 'note-list', path: '/', component: NoteList },
@@ -18,7 +24,12 @@ const routes = [
     { name: 'about', path: '/about.html', component: PagesAbout },
     { name: 'sitemap', path: '/sitemap.html', component: PagesSitemap },
     { name: 'markdown', path: '/markdown.html', component: MarkdownEditor },
+
+    { name: 'app-note-list', path: '/app', component: NoteAppIndex },
+    { name: 'app-note-detail', path: '/app/:id', component: NoteAppDetail },
 ]
+
+
 
 const router = createRouter({
     history: createWebHashHistory(),

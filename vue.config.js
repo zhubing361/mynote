@@ -28,5 +28,13 @@ module.exports = defineConfig({
           return assetFilename.endsWith('.css') || assetFilename.endsWith('.js');
       }
     }
+  },
+  chainWebpack: config => {
+    config
+      .plugin('html')
+      .tap(args => {
+        args[0].title= 'mynote'
+        return args
+      })
   }
 })

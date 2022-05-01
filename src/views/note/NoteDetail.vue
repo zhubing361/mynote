@@ -25,6 +25,12 @@
                         >
                             {{ detail.created_at }} 更新
                         </div>
+                        <div>
+                            <el-tag
+                                v-for="(tag, index) in detail.tags"
+                                :key="index"
+                            >{{tag}}</el-tag>
+                        </div>
                         <div class="page-content">
                             <div class="archive-content">
                                 <markdown-editor

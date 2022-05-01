@@ -59,11 +59,11 @@
                 </ul>
             </div>
 
-            <div
-                class="fr h-right"
-                v-show="nav_show"
-            >
-                <div class="fl mobile">
+            <div class="fr h-right">
+                <div
+                    class="fl mobile"
+                    v-show="nav_show"
+                >
                     <a
                         class="link"
                         href="//www.w3cschool.cn/download"
@@ -89,18 +89,21 @@
                     </div>
                 </div>
 
-                <div
-                    class="fl sig-box"
-                    v-show="nav_show"
-                >
+                <div class="fl sig-box">
                     <div>
                         <a
                             class="link"
                             href="//www.w3cschool.cn/register?refer=/css/list"
+                            v-show="user_show"
                         >注册</a><span class="sep">|</span><a
                             class="link"
                             href="//www.w3cschool.cn/login?refer=/css/list"
+                            v-show="user_show"
                         >登录</a>
+                        <router-link
+                            to="/app"
+                            v-show="app_show"
+                        >h5</router-link>
                     </div>
                 </div>
             </div>
@@ -134,6 +137,8 @@ export default {
     data() {
         return {
             nav_show: false,
+            user_show: false,
+            app_show: true,
             show: true,
             keyword: '',
         };

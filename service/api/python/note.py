@@ -1,4 +1,7 @@
 # coding:utf8
+"""
+mynote_api
+"""
 from elasticsearch import Elasticsearch
 from flask_cors import CORS
 from flask_pymongo import PyMongo
@@ -6,7 +9,6 @@ from flask_restful import Api, Resource
 from flask import Flask, request
 import math
 from datetime import datetime
-import time
 
 app = Flask(__name__)
 CORS(app)
@@ -18,12 +20,21 @@ db_notes = mongo.db.notes
 
 
 def show_date_time(data):
-    data['created_at'] = time.strftime(
-        "%Y-%m-%d %H:%M:%S", time.localtime(int(data['created_at'])))
-    data['updated_at'] = time.strftime(
-        "%Y-%m-%d %H:%M:%S", time.localtime(int(data['updated_at'])))
+    data['created_at'] = datetime.utcfromtimestamp(
+        data['created_at']+28800).strftime("%Y-%m-%d %H:%M:%S")
+    data['updated_at'] = datetime.utcfromtimestamp(
+        data['updated_at']+28800).strftime("%Y-%m-%d %H:%M:%S")
 
     return data
+
+
+def backup_to_local(data):
+    file_path = "../../../docs/backup/" + str(data['title']) + ".md"
+    with open(file_path, mode='w+', encoding='utf-8') as file_obj:
+        content = file_obj.read()
+        new_content = str(data['content'])
+        if(content != new_content and new_content != ""):
+            file_obj.write(data['content'])
 
 
 class Note(Resource):
@@ -53,6 +64,7 @@ class Note(Resource):
         result = db_notes.replace_one({'note_id': int(note_id)}, note)
         count = result.modified_count
         if count > 0:
+            backup_to_local(note)
             return dict(result='success', message='%d 条记录被修改' % count)
         return dict(result='error', message='修改失败')
 
@@ -76,6 +88,7 @@ class NoteList(Resource):
         note['updated_at'] = dt
         note_id = db_notes.insert_one(note).inserted_id
         if note_id is not None:
+            backup_to_local(note)
             return dict(result='success', message='添加成功')
         return dict(result='error', message='添加失败')
 

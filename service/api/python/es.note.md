@@ -604,5 +604,17 @@
         ]
     }
 
+## ik扩展词库历史数据更新
 
-
+    POST index_name/_update_by_query?conflicts=proceed
+    {
+        "query": {
+            "bool": {
+            "must": [
+                {
+                "match_all": {}
+                }
+            ]
+            }
+        }
+    }
