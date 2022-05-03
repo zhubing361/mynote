@@ -15,7 +15,13 @@ const error = (message, time) => {
         duration: time || 5 * 1000,
     });
 }
+
+const goBack = () => {
+    history.back();
+}
+
 export default {
     success,
-    error
+    error,
+    goBack
 }

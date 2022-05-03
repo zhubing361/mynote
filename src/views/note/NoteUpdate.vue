@@ -2,13 +2,17 @@
     <div class="container">
         <top-banner />
         <header>
-            <page-header :search_show="false" />
+            <page-header
+                :search_show="false"
+                :content="'修改-' +form.title"
+                :goBack="confirmContent"
+            />
         </header>
         <div class="container-wrap">
             <el-row :gutter="60">
                 <el-col :span="24">
                     <el-card>
-                        <div class="page-header">
+                        <!-- <div class="page-header">
                             <h2>
                                 <page-nav
                                     path=""
@@ -16,7 +20,7 @@
                                     :show_home="false"
                                 />
                             </h2>
-                        </div>
+                        </div> -->
                         <div class="page-content">
                             <el-form
                                 ref="form"
@@ -89,7 +93,7 @@ import api from '@/api';
 import TopBanner from '@/views/common/TopBanner.vue';
 import PageHeader from '@/views/common/PageHeader.vue';
 import PageFooter from '@/views/common/PageFooter.vue';
-import PageNav from '@/views/common/PageNav.vue';
+// import PageNav from '@/views/common/PageNav.vue';
 import MarkdownFullPageEditor from '@/components/MarkdownFullPageEditor.vue';
 import MarkdownEditor from '@/components/MarkdownEditor.vue';
 import NoteTag from '@/components/note/NoteTag.vue';
@@ -99,7 +103,7 @@ export default {
         'top-banner': TopBanner,
         'page-header': PageHeader,
         'page-footer': PageFooter,
-        'page-nav': PageNav,
+        // 'page-nav': PageNav,
         'fullpage-editor': MarkdownFullPageEditor,
         'markdown-editor': MarkdownEditor,
         'note-tag': NoteTag,
@@ -163,7 +167,7 @@ export default {
                     this.$utils.error(res.message);
                 }
                 if (type == 'button') {
-                    this.$router.push({ path: '/' });
+                    this.$utils.goBack();
                 }
             });
         },
@@ -198,13 +202,13 @@ export default {
                     .then(() => {
                         this.content_saved = true;
                         this.submit('unmount');
-                        this.$router.push({ path: '/' });
+                        this.$utils.goBack();
                     })
                     .catch(action => {
                         if (action == 'cancel') {
                             this.content_saved = true;
                             // 放弃保存并离开页面
-                            this.$router.push({ path: '/' });
+                            this.$utils.goBack();
                         } else {
                             // 停留在当前页面
                             this.$message({
@@ -214,11 +218,10 @@ export default {
                         }
                     });
             } else {
-                this.$router.push({ path: '/' });
+                this.$utils.goBack();
             }
         },
         updateTags(new_tags) {
-            console.log(new_tags);
             this.form.tags = new_tags;
             console.log(this.form.tags);
         },
@@ -228,8 +231,8 @@ export default {
 
 <style scoped>
 .archive-content {
-    display: flex;
-    margin: 0 auto;
+    /* display: flex; */
+    /* margin: 0 auto; */
 }
 
 .page-btns {

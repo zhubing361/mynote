@@ -29,7 +29,9 @@
     "vant": "^3.4.8",
     "vue": "^3.2.13",
     "vue-router": "^4.0.14",
-    "vuex": "^4.0.2"
+    "vuex": "^4.0.2",
+    "echarts": "^5.2.2",
+    "echarts-wordcloud": "^2.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",

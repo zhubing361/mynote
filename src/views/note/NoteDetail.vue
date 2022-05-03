@@ -5,20 +5,23 @@
     >
         <top-banner />
         <header>
-            <page-header :search_show="false" />
+            <page-header
+                :search_show="false"
+                :content="detail.title"
+            />
         </header>
         <div class="container-wrap">
             <el-row :gutter="60">
                 <el-col :span="20">
                     <el-card>
-                        <div class="page-header">
+                        <!-- <div class="page-header">
                             <h2>
                                 <page-nav
                                     path=""
                                     :title="detail.title"
                                 />
                             </h2>
-                        </div>
+                        </div> -->
                         <div
                             class="archive-time"
                             title="创建于:{{detail.created_at}}"
@@ -55,7 +58,7 @@ import api from '@/api';
 import TopBanner from '@/views/common/TopBanner.vue';
 import PageHeader from '@/views/common/PageHeader.vue';
 import PageFooter from '@/views/common/PageFooter.vue';
-import PageNav from '@/views/common/PageNav.vue';
+// import PageNav from '@/views/common/PageNav.vue';
 import MarkdownEditor from '@/components/MarkdownEditor.vue';
 export default {
     name: 'NoteDetail',
@@ -74,7 +77,7 @@ export default {
         'top-banner': TopBanner,
         'page-header': PageHeader,
         'page-footer': PageFooter,
-        'page-nav': PageNav,
+        // 'page-nav': PageNav,
         'markdown-editor': MarkdownEditor,
     },
 

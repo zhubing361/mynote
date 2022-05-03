@@ -5,7 +5,7 @@
     >
         <top-banner />
         <header>
-            <page-header :search_show="true" />
+            <page-index-header :search_show="true" />
         </header>
 
         <div class="page-swiper">
@@ -13,7 +13,7 @@
         </div>
         <div class="container-wrap">
             <el-row :gutter="60">
-                <el-col :span="20">
+                <el-col :span="18">
                     <el-card>
                         <div class="page-header">
                             <h2>首页</h2>
@@ -35,7 +35,7 @@
                         </div>
                     </el-card>
                 </el-col>
-                <el-col :span="4">
+                <el-col :span="6">
                     <page-right />
                 </el-col>
             </el-row>
@@ -48,7 +48,7 @@
 <script>
 import api from '@/api';
 import TopBanner from '@/views/common/TopBanner.vue';
-import PageHeader from '@/views/common/PageHeader.vue';
+import PageIndexHeader from '@/views/common/PageIndexHeader.vue';
 import PageFooter from '@/views/common/PageFooter.vue';
 import PageRight from '@/views/common/PageRight.vue';
 import PageSwiper from '@/views/common/PageSwiper.vue';
@@ -57,7 +57,7 @@ export default {
     name: 'NoteList',
     components: {
         'top-banner': TopBanner,
-        'page-header': PageHeader,
+        'page-index-header': PageIndexHeader,
         'page-footer': PageFooter,
         'page-right': PageRight,
         'page-swiper': PageSwiper,
@@ -69,7 +69,7 @@ export default {
             pagination: {
                 total: 0,
                 currentPage: 1,
-                perPage: 10,
+                perPage: 20,
                 totalPage: 1,
             },
             images: [],

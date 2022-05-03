@@ -12,6 +12,7 @@ import MarkdownEditor from '@/components/MarkdownEditor.vue'
 import NoteAppIndex from '@/views/note/NoteAppIndex.vue'
 import NoteAppDetail from '@/views/note/NoteAppDetail.vue'
 
+// createWebHashHistory createWebHistory
 import { createRouter, createWebHashHistory } from 'vue-router'
 
 
@@ -33,6 +34,7 @@ const routes = [
 
 const router = createRouter({
     history: createWebHashHistory(),
+    // history: createWebHistory(),
     routes, // `routes: routes` 的缩写
 })
 

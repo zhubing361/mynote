@@ -4,7 +4,7 @@
             :title="title"
             left-text="返回"
             left-arrow
-            @click-left="goBack"
+            @click-left="this.$utils.goBack();"
         />
     </div>
 </template>
@@ -19,11 +19,6 @@ export default {
         title: {
             type: String,
             default: '',
-        },
-    },
-    methods: {
-        goBack() {
-            history.back();
         },
     },
 };
