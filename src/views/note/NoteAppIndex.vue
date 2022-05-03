@@ -1,6 +1,10 @@
 <template>
-    <div>
-        <app-go-back :title="title" />
+    <div class="app-container">
+        <app-go-back
+            :title="title"
+            :leftArrow="false"
+            leftText=""
+        />
         <van-search
             v-model="keyword"
             :show-action="false"

@@ -16,6 +16,8 @@
     "@highlightjs/vue-plugin": "^2.1.0",
     "axios": "^0.26.1",
     "core-js": "^3.8.3",
+    "echarts": "^5.2.2",
+    "echarts-wordcloud": "^2.0.0",
     "element-plus": "^2.1.9",
     "highlight.js": "^11.5.1",
     "katex": "^0.15.1",
@@ -25,13 +27,13 @@
     "mermaid": "^8.13.5",
     "mockjs": "^1.1.0",
     "node-sass": "^6.0.1",
+    "qrcode": "^1.5.0",
     "sass-loader": "^12.6.0",
     "vant": "^3.4.8",
     "vue": "^3.2.13",
+    "vue-qrcode": "^1.0.1",
     "vue-router": "^4.0.14",
-    "vuex": "^4.0.2",
-    "echarts": "^5.2.2",
-    "echarts-wordcloud": "^2.0.0"
+    "vuex": "^4.0.2"
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",

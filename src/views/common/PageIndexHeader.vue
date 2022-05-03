@@ -13,48 +13,67 @@
                     to="/"
                     class="logo"
                 ><img
-                        src="//7n.w3cschool.cn/statics/images/logonew2.png"
+                        :src="logo_image"
                         alt="logo"
-                    /></router-link>
+                    />
+                    <h1 style="display:none;">我的笔记</h1>
+                </router-link>
 
                 <ul class="header-menu">
                     <li>
-                        <a
-                            href="//www.w3cschool.cn/tutorial"
-                            title="编程入门教程"
-                        >编程入门教程</a>
+                        <router-link
+                            to="/introduction.html"
+                            title="编程入门"
+                        >编程入门</router-link>
                     </li>
                     <li>
-                        <a
-                            href="//www.w3cschool.cn/courses/"
-                            title="编程课程"
-                        >编程课程</a>
+                        <router-link
+                            to="/advanced.html"
+                            title="编程进阶"
+                        >编程进阶</router-link>
                     </li>
                     <li>
-                        <a
-                            href="//www.w3cschool.cn/codecamp/"
+                        <router-link
+                            to="/bestPractices.html"
                             title="编程实战"
-                        >编程实战</a>
+                        >编程实战</router-link>
                     </li>
                     <li>
-                        <a
-                            href="//www.w3cschool.cn/exam/"
+                        <router-link
+                            to="/exams.html"
                             title="编程题库"
-                        >编程题库</a>
+                        >编程题库</router-link>
                     </li>
                     <li>
-                        <a
-                            href="//123.w3cschool.cn/webtools"
-                            target="_blank"
-                            title="w3cschool在线工具集合"
-                        >在线工具</a>
+                        <router-link
+                            to="/manual.html"
+                            title="编程手册"
+                        >编程手册</router-link>
                     </li>
                     <li>
-                        <a
-                            href="//www.w3cschool.cn/vip?fcode=headermenu"
+                        <router-link
+                            to="/webtools.html"
+                            title="在线工具"
+                        >在线工具</router-link>
+                    </li>
+                    <li>
+                        <router-link
+                            to="/vip.html"
                             title="VIP会员"
                             class="header-menu-vip"
-                        >VIP会员<i class="hot-icon"> 4.23</i></a>
+                        >VIP会员<i class="hot-icon"> 4.23</i></router-link>
+                    </li>
+                    <li>
+                        <router-link
+                            to="/about.html"
+                            title="我的笔记"
+                        >我的笔记</router-link>
+                    </li>
+                    <li>
+                        <router-link
+                            to="/todos.html"
+                            title="待办事项"
+                        >待办事项</router-link>
                     </li>
                 </ul>
             </div>
@@ -62,48 +81,39 @@
             <div class="fr h-right">
                 <div
                     class="fl mobile"
-                    v-show="nav_show"
+                    v-show="app_show"
                 >
-                    <a
-                        class="link"
-                        href="//www.w3cschool.cn/download"
-                        target="_blank"
-                        title="App下载"
-                    >
-                        <i class="i-icon i-icon-mobile"></i>App下载
-                    </a>
+                    <router-link to="/app"><i class="i-icon i-icon-mobile"></i>H5</router-link>
                     <div class="dropdown">
                         <div class="dropdown-inner">
                             <div class="text-center dropdown-content">
                                 <div class="qrcode">
-                                    <img
+                                    <!-- <img
                                         src="//7n.w3cschool.cn/statics/images/w3c/app-qrcode2.png"
                                         alt="APP二维码"
                                         width="150"
                                         height="150"
-                                    />
-                                    <p>扫码下载编程狮APP</p>
+                                    /> -->
+                                    <vue-qrcode :value="app_url" />
+                                    <p>扫码手机访问</p>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="fl sig-box">
+                <div
+                    class="fl sig-box"
+                    v-show="user_show"
+                >
                     <div>
                         <a
                             class="link"
                             href="//www.w3cschool.cn/register?refer=/css/list"
-                            v-show="user_show"
                         >注册</a><span class="sep">|</span><a
                             class="link"
                             href="//www.w3cschool.cn/login?refer=/css/list"
-                            v-show="user_show"
                         >登录</a>
-                        <router-link
-                            to="/app"
-                            v-show="app_show"
-                        >h5</router-link>
                     </div>
                 </div>
             </div>
@@ -132,16 +142,22 @@
 </template>
 
 <script>
+import VueQrcode from 'vue-qrcode';
 export default {
     name: 'PageIndexHeader',
     data() {
         return {
-            nav_show: false,
+            nav_show: true,
             user_show: false,
             app_show: true,
             show: true,
             keyword: '',
+            app_url: '',
+            logo_image: '',
         };
+    },
+    components: {
+        VueQrcode,
     },
     props: {
         search_show: {
@@ -150,6 +166,8 @@ export default {
         },
     },
     mounted() {
+        this.logo_image = require('@/assets/images/logo.png');
+        this.app_url = 'http://' + window.location.host + '#/app';
         this.keyword = this.$parent.keyword;
     },
     methods: {

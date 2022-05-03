@@ -44,7 +44,7 @@
 
 #header_item .logo img {
     display: block;
-    width: 206px;
+    /* width: 206px; */
     height: 36px;
     margin: 22px 0;
 }
@@ -207,7 +207,7 @@
 #header_index .searchbox {
     float: right;
     position: relative;
-    width: 155px;
+    width: 300px;
     height: 35px;
     line-height: 35px;
     margin-top: 22px;
@@ -559,3 +559,9 @@
 }
 
 /** element ui*/
+
+/** app */
+.app-container {
+    max-width: 750px;
+    margin: 0 auto;
+}

@@ -32,6 +32,17 @@
                                 >
                                     <el-input v-model="form.title" />
                                 </el-form-item>
+
+                                <el-form-item
+                                    label="标签"
+                                    prop="tags"
+                                >
+                                    <note-tag
+                                        :tags="form.tags"
+                                        :updateTags="updateTags"
+                                    />
+                                </el-form-item>
+
                                 <el-form-item
                                     label="内容"
                                     prop="content"
@@ -69,6 +80,7 @@ import PageHeader from '@/views/common/PageHeader.vue';
 import PageFooter from '@/views/common/PageFooter.vue';
 // import PageNav from '@/views/common/PageNav.vue';
 import MarkdownEditor from '@/components/MarkdownEditor.vue';
+import NoteTag from '@/components/note/NoteTag.vue';
 export default {
     name: 'NoteCreate',
     components: {
@@ -77,6 +89,7 @@ export default {
         'page-footer': PageFooter,
         // 'page-nav': PageNav,
         'markdown-editor': MarkdownEditor,
+        'note-tag': NoteTag,
     },
     data() {
         return {
@@ -84,6 +97,7 @@ export default {
             form: {
                 note_id: '',
                 title: '',
+                tags: '',
                 content: '',
             },
             md: '',
@@ -116,10 +130,10 @@ export default {
 </script>
 
 <style scoped>
-.archive-content {
-    /* display: flex; */
-    /* margin: 0 auto; */
-}
+/* .archive-content { */
+/* display: flex; */
+/* margin: 0 auto; */
+/* } */
 
 .page-btns {
     margin: 0 auto;

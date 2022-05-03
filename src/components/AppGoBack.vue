@@ -2,8 +2,8 @@
     <div>
         <van-nav-bar
             :title="title"
-            left-text="返回"
-            left-arrow
+            :left-text="leftText"
+            :left-arrow="leftArrow"
             @click-left="this.$utils.goBack();"
         />
     </div>
@@ -16,6 +16,14 @@ export default {
         return {};
     },
     props: {
+        leftArrow: {
+            type: Boolean,
+            default: true,
+        },
+        leftText: {
+            type: String,
+            default: '返回',
+        },
         title: {
             type: String,
             default: '',

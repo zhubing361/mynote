@@ -230,10 +230,10 @@ export default {
 </script>
 
 <style scoped>
-.archive-content {
-    /* display: flex; */
-    /* margin: 0 auto; */
-}
+/* .archive-content { */
+/* display: flex; */
+/* margin: 0 auto; */
+/* } */
 
 .page-btns {
     margin: 0 auto;

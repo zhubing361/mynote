@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="app-container">
         <app-go-back :title="detail.title" />
         <van-tag
             type="primary"
